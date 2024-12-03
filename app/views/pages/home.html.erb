@@ -1,2 +1,20 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="img">
+  <%= image_tag("Designer.jpeg") %>
+</div>
+<div class="search-bar">
+  <%= simple_form_for @car, method: :get, url: cars_path do |f| %>
+  <%= f.input :brand,
+              collection: Car.distinct.pluck(:brand),
+              prompt: "Toutes les marques" %>
+
+  <%= f.input :type,
+              collection: Car.distinct.pluck(:type),
+              prompt: "Tous les types" %>
+
+  <%= f.input :motorization,
+              collection: Car.distinct.pluck(:motorization),
+              prompt: "Toutes les motorisations" %>
+
+  <%= f.button :submit, "Rechercher" %>
+<% end %>
+</div>

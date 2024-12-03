@@ -1,0 +1,6 @@
+<%= simple_form_for [car, rent] do |f| %>
+  <%= f.input :date, label: "Date de location" %>
+  <%= f.input :status, as: :boolean, label: "Accepter la location" if current_user == car.user %>
+  <%= f.input :payment, as: :boolean, label: "Confirmer le paiement" if current_user == rent.user %>
+  <%= f.submit "Confirmer", class: "btn btn-primary" %>
+<% end %>
