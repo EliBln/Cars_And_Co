@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Mes Locations</h1>
+
+  <div class="rents-grid">
+    <% @rents.each do |rent| %>
+      <div class="rent-card">
+        <img src="<%= rent.car.img_url %>" alt="<%= rent.car.name %>">
+        <div class="rent-info">
+          <h3><%= rent.car.name %></h3>
+          <p>Date: <%= rent.date %></p>
+          <p>Statut: <%= rent.status ? "Accepté" : "En attente" %></p>
+          <p>Paiement: <%= rent.payment ? "Effectué" : "En attente" %></p>
+          <% link_to "Supprimer", rent_path(rent),
+          data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr ?" }
+          class: "btn btn-danger" %>
+
+          <% if current_user == rent.car.user %>
+            <%= simple_form_for [rent.car, rent] do |f| %>
+              <%= f.input :status %>
+              <%= f.submit "Mettre à jour", class: "btn btn-primary" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
