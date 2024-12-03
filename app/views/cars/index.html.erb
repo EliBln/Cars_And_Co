@@ -1,28 +1,18 @@
-<h1>Liste des voitures</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Marque</th>
-      <th>Modèle</th>
-      <th>Prix</th>
-      <th>Type</th>
-      <th>Motorisation</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="container-cars-index">
+  <div class="background-cars-index"></div>
+  <h1>Liste des voitures</h1>
+  <div class="card-container">
     <% @cars.each do |car| %>
-      <tr>
-        <td><%= car.brand %></td>
-        <td><%= car.name %></td>
-        <td><%= number_to_currency(car.price, unit: "€", separator: ",", delimiter: " ") %></td>
-        <td><%= car.car_type %></td>
-        <td><%= car.motorization %></td>
-        <td>
+      <div class="card">
+        <div class="card-content">
+          <%= image_tag car.img_url, class: "card-img" %>
+          <h2 class="card-title"><%= car.brand %> <%= car.name %></h2>
+          <p class="card-price"><%= number_to_currency(car.price, unit: "€", separator: ",", delimiter: " ") %></p>
+          <p class="card-type"><strong>Type:</strong> <%= car.car_type %></p>
+          <p class="card-motorization"><strong>Motorisation:</strong> <%= car.motorization %></p>
           <%= link_to 'Voir', car_path(car), class: "btn-link" %>
-        </td>
-      </tr>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>

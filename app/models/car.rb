@@ -7,6 +7,6 @@ class Car < ApplicationRecord
  validates :detail, presence: true
  validates :brand, presence: true
  validates :motorization, presence: true
- #validates :img_url, presence: true, format: {with: }
+ validates :img_url, presence: true
 
 end

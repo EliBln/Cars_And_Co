@@ -13,18 +13,13 @@ User.destroy_all
 
 puts "Creating users..."
 user = User.create(password: "azerty", email: "john@example.com")
+user.save
 
 puts "Creating cars..."
-car = Car.new(
-  name: "RS6 Avant",
-  price: 125000,
-  detail: "V8 bi-turbo 600ch, Pack carbone, Toit panoramique, Jantes 22 pouces",
-  img_url: "https://example.com/audi-rs6.jpg",
-  brand: "Audi",
-  car_type: "Berline",
-  motorization: "Essence"
-)
-car.user = user
-car.save
+20.times do
+  car = Car.new(name: Faker::Vehicle.model, price: Faker::Number.number(digits: 4), detail: Faker::Vehicle.standard_specs, img_url: Faker::LoremFlickr.image, brand: Faker::Vehicle.make, car_type: Faker::Vehicle.car_type, motorization: Faker::Vehicle.transmission)
+  car.user = user
+  car.save
+end
 
 puts "Finished! #{Car.count} cars created"

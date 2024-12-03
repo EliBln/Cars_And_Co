@@ -1,8 +1,10 @@
-<div class="img">
-  <%= image_tag("Designer.jpeg") %>
-</div>
+<div class="container-home">
+  <div class="background-image"></div>
+  <div class="home-title">
+    <h1>Les meilleures voitures au meilleur prix</h1>
+  </div>
 <div class="search-bar">
-  <%= simple_form_for @car, method: :get, url: cars_path do |f| %>
+  <%= simple_form_for @car, method: :get, url: cars_path, html: { class: 'car-search-form' } do |f| %>
   <%= f.input :brand,
               collection: Car.distinct.pluck(:brand),
               prompt: "Toutes les marques" %>
@@ -17,4 +19,5 @@
 
   <%= f.button :submit, "Rechercher" %>
 <% end %>
+</div>
 </div>
