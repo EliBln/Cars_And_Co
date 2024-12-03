@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'rents/index'
-  get 'rents/create'
-  get 'rents/update'
   devise_for :users
   root to: "pages#home"
 
