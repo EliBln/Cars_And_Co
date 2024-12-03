@@ -7,7 +7,7 @@ class CreateCars < ActiveRecord::Migration[7.1]
       t.string :img_url
       t.references :user, null: false, foreign_key: true
       t.string :brand
-      t.string :type
+      t.string :car_type
       t.string :motorization
 
       t.timestamps
