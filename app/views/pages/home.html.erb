@@ -7,8 +7,8 @@
               collection: Car.distinct.pluck(:brand),
               prompt: "Toutes les marques" %>
 
-  <%= f.input :type,
-              collection: Car.distinct.pluck(:type),
+  <%= f.input :car_type,
+              collection: Car.distinct.pluck(:car_type),
               prompt: "Tous les types" %>
 
   <%= f.input :motorization,
