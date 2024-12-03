@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :cars do
+    resources :rents, only: [:create, :update, :destroy]
   end
+  resources :rents, only: [:index, :destroy]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
