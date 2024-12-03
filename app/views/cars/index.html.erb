@@ -1,0 +1,28 @@
+<h1>Liste des voitures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Marque</th>
+      <th>Modèle</th>
+      <th>Prix</th>
+      <th>Type</th>
+      <th>Motorisation</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cars.each do |car| %>
+      <tr>
+        <td><%= car.brand %></td>
+        <td><%= car.name %></td>
+        <td><%= number_to_currency(car.price, unit: "€", separator: ",", delimiter: " ") %></td>
+        <td><%= car.car_type %></td>
+        <td><%= car.motorization %></td>
+        <td>
+          <%= link_to 'Voir', car_path(car), class: "btn-link" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
