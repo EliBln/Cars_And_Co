@@ -1,6 +1,38 @@
-<div class="container-profil"></div>
-<h1>Mon Profil</h1>
-<div class="profil-info">
-  <h2><%= current_user.username %></h2>
-  <p>Email: <%= current_user.email %></p>
-  <%= link_to "Modifier", edit_user_registration_path, class: "btn btn-primary" %>
+<div class="container-profil">
+  <h1>Mon Profil</h1>
+  <div class="profil-info">
+    <h2><%= current_user.username %></h2>
+    <p>Email: <%= current_user.email %></p>
+    <%= link_to "Modifier", edit_user_registration_path, class: "btn btn-primary" %>
+  </div>
+  <h2>My cars rents</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Car</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Price</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%# cars current user %>
+      <% @car.each do |rent| %>
+        <tr>
+          <td>
+            <%= link_to car_path(rent) do %>
+              <%= rent.brand %> <%= rent.name %>
+            <% end %>
+          </td>
+          <td><%= rent.start_date.strftime("%d/%m/%Y %H:%M") %></td>
+          <td><%= rent.end_date.strftime("%d/%m/%Y %H:%M") %></td>
+          <td><%= number_to_currency(rent.price, unit: "€", separator: ",", delimiter: " ") %></td>
+          <% @rents.each do |rent| %>
+            <td><%= rent.payment ? "Payé" : "En ligne" %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
