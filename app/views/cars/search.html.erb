@@ -1,0 +1,18 @@
+<div class="container-cars-search_index">
+  <div class="background-cars-search_index"></div>
+  <h1>Liste des voitures</h1>
+  <div class="card-container">
+    <% @cars.each do |car| %>
+      <div class="card">
+        <div class="card-content">
+          <%= image_tag car.img_url, class: "card-img" %>
+          <h2 class="card-title"><%= car.brand %> <%= car.name %></h2>
+          <p class="card-price"><%= number_to_currency(car.price, unit: "€", separator: ",", delimiter: " ") %></p>
+          <p class="card-type"><strong>Type:</strong> <%= car.car_type %></p>
+          <p class="card-motorization"><strong>Motorisation:</strong> <%= car.motorization %></p>
+          <%= link_to 'Voir', car_path(car), class: "btn-link" %>
+        </div>
+      </div>
+    <% end %>
+  </tbody>
+</table>

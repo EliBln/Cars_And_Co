@@ -1,0 +1,6 @@
+<div class="container-profil"></div>
+<h1>Mon Profil</h1>
+<div class="profil-info">
+  <h2><%= current_user.username %></h2>
+  <p>Email: <%= current_user.email %></p>
+  <%= link_to "Modifier", edit_user_registration_path, class: "btn btn-primary" %>
