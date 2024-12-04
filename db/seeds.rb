@@ -17,7 +17,7 @@ user.save
 
 puts "Creating cars..."
 20.times do
-  car = Car.new(name: Faker::Vehicle.model, price: Faker::Number.number(digits: 4), detail: Faker::Vehicle.standard_specs, img_url: Faker::LoremFlickr.image, brand: Faker::Vehicle.make, car_type: Faker::Vehicle.car_type, motorization: Faker::Vehicle.transmission)
+  car = Car.new(name: Faker::Vehicle.model, price: Faker::Number.number(digits: 4), detail: Faker::Vehicle.standard_specs, img_url: Faker::LoremFlickr.image, brand: Faker::Vehicle.make, car_type: Faker::Vehicle.car_type, motorization: Faker::Vehicle.transmission, address: Faker::Address.full_address)
   car.user = user
   car.save
 end

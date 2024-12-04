@@ -6,6 +6,7 @@ class CarsController < ApplicationController
 
   def show
     @car = Car.find(params[:id])
+    @markers = @car.geocode
   end
 
   def new
