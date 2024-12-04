@@ -6,4 +6,7 @@
   <p><strong>Type:</strong> <%= @car.car_type %></p>
   <p><strong>Motorisation:</strong> <%= @car.motorization %></p>
   <p><strong>Détails:</strong> <%= @car.detail %></p>
+  <p><strong>Date de disponibilité:</strong> <%= @car.start_date.strftime("%d/%m/%Y %H:%M")  %></p>
+  <p><strong>Date de retour:</strong> <%= @car.end_date.strftime("%d/%m/%Y %H:%M") %></p>
+
 </div>
