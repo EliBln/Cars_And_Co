@@ -4,6 +4,25 @@ class CarsController < ApplicationController
     @cars = Car.all
   end
 
+  def search
+    @cars = Car.all
+    if params[:car][:car_type].present? && params[:car][:brand].present? && params[:car][:motorization].present?
+      @cars = @cars.where(car_type: params[:car][:car_type]).where(brand: params[:car][:brand]).where(motorization: params[:car][:motorization])
+      elsif params[:car][:car_type].present? && params[:car][:brand].present?
+      @cars = @cars.where(car_type: params[:car][:car_type]).where(brand: params[:car][:brand])
+      elsif params[:car][:car_type].present? && params[:car][:motorization].present?
+      @cars = @cars.where(car_type: params[:car][:car_type]).where(motorization: params[:car][:motorization])
+      elsif params[:car][:brand].present? && params[:car][:motorization].present?
+      @cars = @cars.where(brand: params[:car][:brand]).where(motorization: params[:car][:motorization])
+      elsif params[:car][:car_type].present?
+      @cars = @cars.where(car_type: params[:car][:car_type])
+      elsif params[:car][:brand].present?
+      @cars = @cars.where(brand: params[:car][:brand])
+      elsif params[:car][:motorization].present?
+      @cars = @cars.where(motorization: params[:car][:motorization])
+      end
+  end
+
   def show
     @car = Car.find(params[:id])
   end

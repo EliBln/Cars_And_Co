@@ -4,7 +4,7 @@
     <h1>Les meilleures voitures au meilleur prix</h1>
   </div>
 <div class="search-bar">
-  <%= simple_form_for @car, method: :get, url: cars_path, html: { class: 'car-search-form' } do |f| %>
+  <%= simple_form_for @car, method: :get, url: search_path, html: { class: 'car-search-form' } do |f| %>
   <%= f.input :brand,
               collection: Car.distinct.pluck(:brand),
               prompt: "Toutes les marques" %>
