@@ -1,4 +1,3 @@
-
 <div class="container-car-details">
   <div class="car-details-container-top">
     <div class="car-image">
@@ -15,8 +14,12 @@
       <button>resever</button>
       <%# <%= link_to 'Réserver', new_reservation_path(car_id: @car.id), class: "btn-reserve" %>
       </div>
-      <div class="car-mapbox">
-    </div>
+      <div class="car-mapbox" 
+        style="width: 100%; height: 400px;"
+        data-controller="map"
+        data-map-lng-value="<%= @car.longitude %>"
+        data-map-lat-value="<%= @car.latitude %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
   </div>
-
 </div>
