@@ -1,17 +1,25 @@
-<h1><%= @car.brand %></h1>
-
-<div class="car-details">
-  <img src="<%= @car.img_url %>" alt="<%= @car.name %>">
-  <p><strong>Prix:</strong> <%= number_to_currency(@car.price, unit: "€", separator: ",", delimiter: " ") %></p>
-  <p><strong>Type:</strong> <%= @car.car_type %></p>
-  <p><strong>Motorisation:</strong> <%= @car.motorization %></p>
-  <p><strong>Détails:</strong> <%= @car.detail %></p>
-  <p><strong>Adresse:</strong> <%= @car.address %></p>
-</div>
-
-<div style="width: 100%; height: 400px;"
-      data-controller="map"
-      data-map-lng-value="<%= @markers[1] %>"
-      data-map-lat-value="<%= @markers[0] %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+<div class="container-car-details">
+  <div class="car-details-container-top">
+    <div class="car-image">
+      <%= image_tag @car.img_url, class: "car-img" %>
+    </div>
+    <div class="car-details">
+      <h1 class="car-title"><%= @car.brand %> <%= @car.name %></h1>
+      <p class="car-price"><%= number_to_currency(@car.price, unit: "€", separator: ",", delimiter: " ") %> / jour</p>
+      <p class="car-type"><strong>Type:</strong> <%= @car.car_type %></p>
+      <p class="car-motorization"><strong>Motorisation:</strong> <%= @car.motorization %></p>
+      <p class="car-description"><%= @car.detail %></p>
+      <p class="car-dispo"><%= @car.start_date.strftime("%d/%m/%Y %H:%M") %></p>
+      <p class="car-retour"><%= @car.end_date.strftime("%d/%m/%Y %H:%M") %></p>
+      <button>resever</button>
+      <%# <%= link_to 'Réserver', new_reservation_path(car_id: @car.id), class: "btn-reserve" %>
+      </div>
+      <div class="car-mapbox" 
+        style="width: 100%; height: 400px;"
+        data-controller="map"
+        data-map-lng-value="<%= @car.longitude %>"
+        data-map-lat-value="<%= @car.latitude %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+  </div>
 </div>
