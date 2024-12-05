@@ -1,7 +1,5 @@
 .footer {
-  bottom: 0;
-  left: 0;
-  right: 0;
+  width: 100%;
   padding: 2rem;
   background: rgba(0, 0, 0, 0.784);
   color: white;
@@ -10,5 +8,10 @@
   justify-content: center;
   align-items: center;
   gap: 0.2rem;
-  margin-top: 0px;
+  margin-top: auto;
+
+  // Pour s'assurer que le footer reste en bas
+  &:not(:empty) {
+    min-height: 60px; // Hauteur minimale du footer
+  }
 }

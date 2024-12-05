@@ -1,0 +1,114 @@
+.new-car-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: $spacing-unit;
+  background-color: $couleur-fond;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  animation: fadeInUp $animation-duration $transition-timing;
+
+  h1 {
+    font-size: $font-size-xxlarge;
+    color: $couleur-texte;
+    margin-bottom: $spacing-unit;
+    text-align: center;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background-color: $couleur-accent;
+      margin: 0.5rem auto;
+    }
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-unit;
+
+    .form-group {
+      margin-bottom: $spacing-medium;
+
+      &.full-width {
+        grid-column: 1 / -1;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: $couleur-gris-fonce;
+        font-size: $font-size-medium;
+        font-weight: 500;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid $couleur-gris-clair;
+        border-radius: $border-radius-small;
+        font-size: $font-size-base;
+        @include transition(border-color);
+
+        &:focus {
+          outline: none;
+          border-color: $couleur-accent;
+          box-shadow: 0 0 0 2px rgba($couleur-accent, 0.1);
+        }
+
+        &[type="datetime-local"] {
+          padding: 0.7rem;
+        }
+      }
+
+      textarea.form-control {
+        min-height: 120px;
+        resize: vertical;
+      }
+    }
+
+    .btn-primary {
+      grid-column: 1 / -1;
+      padding: 1rem;
+      background-color: $couleur-accent;
+      color: $couleur-fond;
+      border: none;
+      border-radius: $border-radius-small;
+      font-size: $font-size-medium;
+      font-weight: 600;
+      cursor: pointer;
+      @include transition(all);
+      margin-top: $spacing-unit;
+
+      &:hover {
+        background-color: $couleur-accent-hover;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+// Media Queries
+@media (max-width: $breakpoint-tablet) {
+  .new-car-container {
+    margin: $spacing-unit;
+
+    form {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
