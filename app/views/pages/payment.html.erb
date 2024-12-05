@@ -49,12 +49,12 @@
 
         <div class="price-item">
           <span>Durée de location</span>
-          <span><%= pluralize((@car.end_date - @car.start_date).to_i, "jour") %></span>
+          <span><%= pluralize((@car.end_date.to_date - @car.start_date.to_date).to_i + 1, "jour") %></span>
         </div>
 
         <div class="price-item total">
           <span>Total</span>
-          <span><%= number_to_currency(@car.price * (@car.end_date - @car.start_date).to_i, unit: "€") %></span>
+          <span><%= number_to_currency(@car.price * ((@car.end_date.to_date - @car.start_date.to_date).to_i + 1), unit: "€") %></span>
         </div>
       </div>
 
