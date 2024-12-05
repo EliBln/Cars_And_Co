@@ -11,10 +11,9 @@
       <p class="car-description"><%= @car.detail %></p>
       <p class="car-dispo"><%= @car.start_date.strftime("%d/%m/%Y %H:%M") %></p>
       <p class="car-retour"><%= @car.end_date.strftime("%d/%m/%Y %H:%M") %></p>
-      <button>resever</button>
-      <%# <%= link_to 'Réserver', new_reservation_path(car_id: @car.id), class: "btn-reserve" %>
+      <%= link_to 'Réserver', payment_path(car_id: @car.id), class: "btn btn-primary" %>
       </div>
-      <div class="car-mapbox" 
+      <div class="car-mapbox"
         style="width: 100%; height: 400px;"
         data-controller="map"
         data-map-lng-value="<%= @car.longitude %>"
