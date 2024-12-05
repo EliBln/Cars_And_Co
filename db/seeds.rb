@@ -12,22 +12,59 @@ Car.destroy_all
 User.destroy_all
 
 puts "Creating users..."
-user = User.create(password: "azerty", email: "john@example.com")
-user.save
+user1 = User.create!(
+  email: "user1@example.com",
+  password: "password123",
+  username: "UserOne"
+)
 
-  puts "Creating cars..."
-  20.times do
+user2 = User.create!(
+  email: "user2@example.com",
+  password: "password123",
+  username: "UserTwo"
+)
 
-    start_date = Faker::Date.between(from: 1.year.ago, to: Date.today).to_time
-    start_date = start_date.change(hour: rand(24), min: [0, 10, 20, 30, 40, 50].sample, sec: rand(60))
+puts "Creating cars for user2..."
+car1 = Car.create!(
+  name: "Mercedes Class A",
+  price: 1500,
+  detail: "Automatic transmission, GPS, Leather seats",
+  user: user2,
+  img_url: "https://example.com/car_a.jpg",
+  brand: "Mercedes",
+  car_type: "Sedan",
+  motorization: "Automatic",
+  address: "16 Villa Gaudelet, Paris",
+  start_date: Date.today,
+  end_date: Date.today + 7
+)
 
-    
-    end_date = Faker::Date.between(from: start_date, to: 1.year.from_now).to_time
-    end_date = end_date.change(hour: rand(24), min: [0, 10, 20, 30, 40, 50].sample, sec: rand(60))
+car2 = Car.create!(
+  name: "BMW X5",
+  price: 2000,
+  detail: "4x4, Panoramic roof, Premium sound system",
+  user: user2,
+  img_url: "https://example.com/car_b.jpg",
+  brand: "BMW",
+  car_type: "SUV",
+  motorization: "Automatic",
+  address: "20 Avenue de Wagram, Paris",
+  start_date: Date.today + 1,
+  end_date: Date.today + 14
+)
 
-    car = Car.new(name: Faker::Vehicle.model, price: Faker::Number.number(digits: 4), detail: Faker::Vehicle.standard_specs, img_url: Faker::LoremFlickr.image, brand: Faker::Vehicle.make, car_type: Faker::Vehicle.car_type, motorization: Faker::Vehicle.transmission, address: Faker::Address.full_address, start_date: start_date, end_date: end_date)
-    car.user = user
-    car.save
-end
+car3 = Car.create!(
+  name: "Audi A3",
+  price: 1200,
+  detail: "Sport package, LED lights, Parking sensors",
+  user: user2,
+  img_url: "https://example.com/car_c.jpg",
+  brand: "Audi",
+  car_type: "Compact",
+  motorization: "Manual",
+  address: "35 Rue du Faubourg Saint-Antoine, Paris",
+  start_date: Date.today + 2,
+  end_date: Date.today + 10
+)
 
-puts "Finished! #{Car.count} cars created"
+puts "Seed completed! Created #{User.count} users and #{Car.count} cars"
