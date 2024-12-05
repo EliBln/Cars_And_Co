@@ -25,5 +25,8 @@ class PagesController < ApplicationController
       flash[:alert] = "Une erreur est survenue. Veuillez réessayer."
       redirect_to payment_car_path(@car)
     end
+  def profil
+    @car = current_user.cars.where(user_id: current_user.id)
+    @rents = Rent.where(user_id: current_user.id)
   end
 end
