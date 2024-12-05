@@ -4,10 +4,17 @@ Rails.application.routes.draw do
 
   resources :cars do
     resources :rents, only: [:create, :update, :destroy]
+    member do
+      patch :validate_payment
+    end
   end
+  
   resources :rents, only: [:index, :destroy]
   get "search", to: "cars#search"
   get "profil", to: "pages#profil"
+  get 'payment', to: 'pages#payment', as: 'payment'
+
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

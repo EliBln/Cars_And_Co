@@ -1,0 +1,20 @@
+<h1>Récapitulatif de votre réservation</h1>
+
+<div class="car-summary">
+  <h2>Voiture : <%= @car.name %></h2>
+  <p><strong>Marque :</strong> <%= @car.brand %></p>
+<p><strong>Prix :</strong> <%= number_to_currency(@car.price, unit: "€") %></p>
+  <p><strong>Type :</strong> <%= @car.car_type %></p>
+  <p><strong>Motorisation :</strong> <%= @car.motorization %></p>
+  <p><strong>Date de début :</strong> <%= @car.start_date.present? ? @car.start_date.strftime("%d/%m/%Y %H:%M") : "Non spécifiée" %></p>
+  <p><strong>Date de fin :</strong> <%= @car.end_date.present? ? @car.end_date.strftime("%d/%m/%Y %H:%M") : "Non spécifiée" %></p>
+   <% if @car.rents.any? %>
+  <p><strong>Payment :</strong> <%= @car.rents.last.payment ? "Effectué" : "Non effectué" %></p>
+<% else %>
+
+<% end %>
+
+   <div class="actions">
+  <%= button_to 'Valider le paiement', validate_payment_car_path(@car), method: :patch, class: "btn btn-success" %>
+</div>
+</div>
