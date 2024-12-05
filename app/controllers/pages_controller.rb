@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @cars = Car.new
+    @car = Car.new
   end
 
   def profil
