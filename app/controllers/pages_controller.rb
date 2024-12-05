@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   end
 
   def payment
+    @cars = Car.all
     @car = Car.find_by(id: params[:car_id])
     if @car.nil?
       redirect_to cars_path, alert: "La voiture demandée est introuvable."
@@ -25,6 +26,8 @@ class PagesController < ApplicationController
       flash[:alert] = "Une erreur est survenue. Veuillez réessayer."
       redirect_to payment_car_path(@car)
     end
+  end
+
   def profil
     @car = current_user.cars.where(user_id: current_user.id)
     @rents = Rent.where(user_id: current_user.id)
