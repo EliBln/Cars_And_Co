@@ -61,15 +61,11 @@
       <div class="payment-status">
         <% if @car.rents.any? %>
           <div class="status <%= @car.rents.last.payment ? 'paid' : 'pending' %>">
-            <%= @car.rents.last.payment ? "Paiement effectué" : "Paiement en attente" %>
+            <%= @car.rents.find_by(user_id: current_user.id).payment ? "Effectué" : "Non effectué" %>
           </div>
         <% end %>
       </div>
-
-      <%= button_to 'Valider le paiement',
-          validate_payment_car_path(@car),
-          method: :patch,
-          class: "payment-button" %>
+      <%= link_to 'Valider le paiement', validate_payment_rent_path(@rent), class: "payment-button" %>
     </div>
   </div>
 </div>

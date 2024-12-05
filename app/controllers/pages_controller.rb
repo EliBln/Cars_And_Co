@@ -6,30 +6,28 @@ class PagesController < ApplicationController
   def payment
     @cars = Car.all
     @car = Car.find_by(id: params[:car_id])
-    if @car.nil?
-      redirect_to cars_path, alert: "La voiture demandée est introuvable."
-    else
-      @rent = @car.rents.last
+    @rent = Rent.new
+    @rent.car = @car
+    @rent.user = current_user
+    if !@rent.save!
+      render "cars/show", status: :unprocessable_entity
     end
   end
 
   def validate_payment
-    @car = Car.find_by(id: params[:car_id])
-
-    if @car.nil?
-      flash[:alert] = "La voiture demandée est introuvable."
-      redirect_to cars_path
-    elsif @car.update(payment: true)
-      flash[:notice] = "Le paiement a été validé avec succès."
-      redirect_to @car
-    else
-      flash[:alert] = "Une erreur est survenue. Veuillez réessayer."
-      redirect_to payment_car_path(@car)
-    end
+    @rent = Rent.find_by(id: params[:id])
+    @rent.payment = true
+    @rent.save!
+    redirect_to root_path
   end
 
   def profil
-    @car = current_user.cars.where(user_id: current_user.id)
-    @rents = Rent.where(user_id: current_user.id)
+    if current_user
+      @cars = current_user.cars
+      @rents = current_user.rents.includes(:car)
+    else
+      redirect_to new_user_session_path, alert: "Vous devez être connecté pour accéder à cette page."
+    end
   end
+
 end

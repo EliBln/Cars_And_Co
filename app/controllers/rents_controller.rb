@@ -7,6 +7,7 @@ class RentsController < ApplicationController
     end
   end
 
+
   def new
     @rent = Rent.new
   end
@@ -16,11 +17,12 @@ class RentsController < ApplicationController
     @rent = Rent.new(rent_params)
     @rent.car = @car
     @rent.user = current_user
-    if @rent.save
+    if @rent.save!
       redirect_to rents_path
     else
       render "cars/show", status: :unprocessable_entity
     end
+   end
 
     def update
       @rent = Rent.find(params[:id])
@@ -40,4 +42,3 @@ class RentsController < ApplicationController
       params.require(:rent).permit(:payment)
     end
   end
-end

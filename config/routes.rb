@@ -4,12 +4,13 @@ Rails.application.routes.draw do
 
   resources :cars do
     resources :rents, only: [:create, :update, :destroy]
-    member do
-      patch :validate_payment
-    end
   end
-  
-  resources :rents, only: [:index, :destroy]
+
+  resources :rents, only: [:index, :destroy] do
+  member do
+    get :validate_payment, to: "pages#validate_payment"
+  end
+end
   get "search", to: "cars#search"
   get "profil", to: "pages#profil"
   get 'payment', to: 'pages#payment', as: 'payment'
@@ -23,4 +24,4 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-end
+end 
