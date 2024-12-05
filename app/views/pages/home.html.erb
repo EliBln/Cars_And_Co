@@ -1,23 +1,75 @@
-<div class="container-home">
-  <div class="background-image"></div>
-  <div class="home-title">
-    <h1>Les meilleures voitures au meilleur prix</h1>
-  </div>
-<div class="search-bar">
-  <%= simple_form_for @car, method: :get, url: search_path, html: { class: 'car-search-form' } do |f| %>
-  <%= f.input :brand,
-              collection: Car.distinct.pluck(:brand),
-              prompt: "Toutes les marques" %>
+<div class="home-container">
+  <!-- Hero Banner Section -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h1 class="hero-title">Les meilleures voitures au meilleur prix</h1>
+      <p class="hero-subtitle">Découvrez notre sélection exclusive de véhicules premium</p>
+    </div>
+  </section>
 
-  <%= f.input :car_type,
-              collection: Car.distinct.pluck(:car_type),
-              prompt: "Tous les types" %>
+  <!-- Search Section -->
+  <section class="search-section">
+    <div class="search-container">
+      <h2 class="search-title">Trouvez votre véhicule idéal</h2>
+      <%= simple_form_for @car, method: :get, url: search_path, html: { class: 'search-form' } do |f| %>
+        <div class="search-grid">
+          <div class="form-field">
+            <%= f.input :brand,
+                        collection: Car.distinct.pluck(:brand),
+                        prompt: "Toutes les marques",
+                        label: false,
+                        input_html: { class: 'custom-select' } %>
+          </div>
 
-  <%= f.input :motorization,
-              collection: Car.distinct.pluck(:motorization),
-              prompt: "Toutes les motorisations" %>
+          <div class="form-field">
+            <%= f.input :car_type,
+                        collection: Car.distinct.pluck(:car_type),
+                        prompt: "Tous les types",
+                        label: false,
+                        input_html: { class: 'custom-select' } %>
+          </div>
 
-  <%= f.button :submit, "Rechercher" %>
-<% end %>
-</div>
+          <div class="form-field">
+            <%= f.input :motorization,
+                        collection: Car.distinct.pluck(:motorization),
+                        prompt: "Toutes les motorisations",
+                        label: false,
+                        input_html: { class: 'custom-select' } %>
+          </div>
+
+          <div class="form-field">
+            <%= f.button :submit, "Rechercher", class: 'search-button' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- Featured Categories -->
+  <section class="categories-section">
+    <div class="categories-container">
+      <h2 class="categories-title">Catégories populaires</h2>
+      <div class="categories-grid">
+        <%= link_to search_path(car: { car_type: 'Sedan' }), class: 'category-card' do %>
+          <div class="category-icon">🚗</div>
+          <h3>Sedan</h3>
+        <% end %>
+
+        <%= link_to search_path(car: { car_type: 'SUV' }), class: 'category-card' do %>
+          <div class="category-icon">🚙</div>
+          <h3>SUV</h3>
+        <% end %>
+
+        <%= link_to search_path(car: { car_type: 'Sport' }), class: 'category-card' do %>
+          <div class="category-icon">🏎</div>
+          <h3>Sport</h3>
+        <% end %>
+
+        <%= link_to search_path(car: { motorization: 'Électrique' }), class: 'category-card' do %>
+          <div class="category-icon">⚡</div>
+          <h3>Électrique</h3>
+        <% end %>
+      </div>
+    </div>
+  </section>
 </div>

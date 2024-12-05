@@ -1,0 +1,170 @@
+// Variables additionnelles pour la page profil
+.container-profil {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-unit;
+  animation: fadeInUp 0.6s ease-out;
+
+  h1 {
+    font-size: 2.5rem;
+    color: $couleur-texte;
+    margin-bottom: $spacing-unit;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background-color: $couleur-accent;
+      margin-top: 0.5rem;
+    }
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    color: $couleur-texte;
+    margin: $spacing-unit 0;
+  }
+
+  .profil-info {
+    background-color: $couleur-fond;
+    padding: $spacing-unit;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    margin-bottom: $spacing-unit * 2;
+    @include transition(transform);
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 2rem;
+      color: $couleur-accent;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: $couleur-gris-fonce;
+      margin: 1rem 0;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background-color: $couleur-accent;
+      color: $couleur-fond;
+      padding: 0.8rem 1.5rem;
+      border-radius: $border-radius;
+      text-decoration: none;
+      font-weight: 500;
+      @include transition(all);
+
+      &:hover {
+        background-color: $couleur-accent-hover;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  .table {
+    width: 100%;
+    background-color: $couleur-fond;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    margin-top: 1rem;
+
+    thead {
+      background-color: $couleur-gris-clair;
+
+      th {
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: $couleur-texte;
+        border-bottom: 2px solid $table-border-color;
+      }
+    }
+
+    tbody {
+      tr {
+        @include transition(background-color);
+
+        &:hover {
+          background-color: $table-hover-color;
+        }
+
+        td {
+          padding: 1rem;
+          border-bottom: 1px solid $table-border-color;
+          color: $couleur-gris-fonce;
+
+          a {
+            color: $couleur-accent;
+            text-decoration: none;
+            font-weight: 500;
+            @include transition(color);
+
+            &:hover {
+              color: $couleur-accent-hover;
+            }
+          }
+
+          &:last-child {
+            font-weight: 500;
+
+            &:contains("Payé") {
+              color: $status-paid;
+            }
+
+            &:contains("En ligne") {
+              color: $status-pending;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animation pour les lignes du tableau
+@keyframes fadeInRow {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.table tbody tr {
+  animation: fadeInRow 0.3s ease-out forwards;
+  @for $i from 1 through 20 {
+    &:nth-child(#{$i}) {
+      animation-delay: $i * 0.05s;
+    }
+  }
+}
+
+// Media queries pour la responsivité
+@media (max-width: 768px) {
+  .table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    thead th {
+      white-space: nowrap;
+    }
+  }
+
+  .profil-info {
+    padding: 1rem;
+  }
+}
