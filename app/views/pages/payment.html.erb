@@ -1,19 +1,71 @@
-<h1>Récapitulatif de votre réservation</h1>
+<div class="payment-container">
+  <div class="payment-grid">
+    <!-- Résumé de la réservation -->
+    <div class="booking-summary">
+      <h1>Récapitulatif de votre réservation</h1>
 
-<div class="car-summary">
-  <h2>Voiture : <%= @car.name %></h2>
-  <p><strong>Marque :</strong> <%= @car.brand %></p>
-<p><strong>Prix :</strong> <%= number_to_currency(@car.price, unit: "€") %></p>
-  <p><strong>Type de voiture :</strong> <%= @car.car_type %></p>
-  <p><strong>Motorisation :</strong> <%= @car.motorization %></p>
-  <p><strong>Date de début :</strong> <%= @car.start_date.present? ? @car.start_date.strftime("%d/%m/%Y %H:%M") : "Non spécifiée" %></p>
-  <p><strong>Date de fin :</strong> <%= @car.end_date.present? ? @car.end_date.strftime("%d/%m/%Y %H:%M") : "Non spécifiée" %></p>
-   <% if @car.rents.any? %>
-  <p><strong>Payment :</strong> <%= @car.rents.find_by(user_id: current_user.id).payment ? "Effectué" : "Non effectué" %></p>
-<% else %>
+      <div class="car-details">
+        <div class="car-image">
+          <%= image_tag @car.img_url, alt: "#{@car.brand} #{@car.name}" %>
+        </div>
 
-<% end %>
-   <div class="actions">
-  <%= link_to 'Valider le paiement', validate_payment_rent_path(@rent), class: "btn btn-success" %>
-</div>
+        <div class="car-info">
+          <h2><%= @car.brand %> <%= @car.name %></h2>
+
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="label">Type</span>
+              <span class="value"><%= @car.car_type %></span>
+            </div>
+
+            <div class="info-item">
+              <span class="label">Motorisation</span>
+              <span class="value"><%= @car.motorization %></span>
+            </div>
+
+            <div class="info-item">
+              <span class="label">Date de début</span>
+              <span class="value"><%= @car.start_date.present? ? @car.start_date.strftime("%d/%m/%Y %H:%M") : "Non spécifiée" %></span>
+            </div>
+
+            <div class="info-item">
+              <span class="label">Date de fin</span>
+              <span class="value"><%= @car.end_date.present? ? @car.end_date.strftime("%d/%m/%Y %H:%M") : "Non spécifiée" %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section paiement -->
+    <div class="payment-summary">
+      <h2>Détails du paiement</h2>
+
+      <div class="price-details">
+        <div class="price-item">
+          <span>Prix journalier</span>
+          <span><%= number_to_currency(@car.price, unit: "€") %></span>
+        </div>
+
+        <div class="price-item">
+          <span>Durée de location</span>
+          <span><%= pluralize((@car.end_date - @car.start_date).to_i, "jour") %></span>
+        </div>
+
+        <div class="price-item total">
+          <span>Total</span>
+          <span><%= number_to_currency(@car.price * (@car.end_date - @car.start_date).to_i, unit: "€") %></span>
+        </div>
+      </div>
+
+      <div class="payment-status">
+        <% if @car.rents.any? %>
+          <div class="status <%= @car.rents.last.payment ? 'paid' : 'pending' %>">
+            <%= @car.rents.find_by(user_id: current_user.id).payment ? "Effectué" : "Non effectué" %>
+          </div>
+        <% end %>
+      </div>
+      <%= link_to 'Valider le paiement', validate_payment_rent_path(@rent), class: "payment-button" %>
+    </div>
+  </div>
 </div>

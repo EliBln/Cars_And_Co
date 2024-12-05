@@ -1,86 +1,107 @@
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+// Styles
+body {
+  background-color: $couleur-fond;
+  color: $couleur-texte;
+  font-family: Arial, sans-serif;
+  height: 100%;
+}
+
 html {
   height: 100%;
 }
 
-body {
-  height: 100%;
-}
-
 .container-cars-search_index {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  padding: 2rem;
+
+  .background-cars-search_index {
+    background-color: $couleur-gris-clair;
+    height: 200px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
   h1 {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    margin-top: 5%;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: $couleur-texte;
+  }
+
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
   }
 }
 
-.background-cars-search_index {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(224, 224, 224);
-  background-size: cover;
-  z-index: -1;
-}
-
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
-
 .card {
-  background: white;
+  background-color: $couleur-fond;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 300px;
-  margin: 1rem;
-  transition: transform 0.2s;
-}
+  @include transition(transform);
 
-.card:hover {
-  transform: translateY(-5px);
-}
+  &:hover {
+    transform: translateY(-5px);
+  }
 
-.card-content {
-  padding: 1.5rem;
-}
+  &-content {
+    padding: 1.5rem;
+  }
 
-.card-title {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
+  &-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
 
-.card-price {
-  font-size: 1.2rem;
-  color: #333;
-  margin-bottom: 1rem;
-}
+  &-title {
+    font-size: 1.25rem;
+    margin: 1rem 0;
+    color: $couleur-texte;
+  }
 
-.card-type,
-.card-motorization {
-  margin-bottom: 0.5rem;
+  &-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $couleur-accent;
+    margin-bottom: 0.5rem;
+  }
+
+  &-type,
+  &-motorization {
+    font-size: 0.9rem;
+    color: $couleur-gris-fonce;
+    margin-bottom: 0.5rem;
+  }
 }
 
 .btn-link {
   display: inline-block;
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
-  color: white;
+  background-color: $couleur-accent;
+  color: $couleur-fond;
   text-decoration: none;
+  padding: 0.5rem 1rem;
   border-radius: 4px;
-  transition: background-color 0.2s;
-}
+  @include transition(background-color);
 
-.btn-link:hover {
-  background-color: #0056b3;
+  &:hover {
+    background-color: $couleur-accent-hover;
+  }
 }

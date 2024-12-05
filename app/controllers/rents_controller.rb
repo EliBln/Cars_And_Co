@@ -39,6 +39,6 @@ class RentsController < ApplicationController
     private
 
     def rent_params
-      params.require(:rent).permit(:status, :payment)
+      params.require(:rent).permit(:payment)
     end
   end

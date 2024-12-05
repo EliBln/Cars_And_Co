@@ -1,0 +1,98 @@
+// Couleurs principales
+$couleur-fond: #ffffff;
+$couleur-texte: #1d1d1d;
+$couleur-gris-clair: #f8f8f9;
+$couleur-gris-fonce: #808080;
+$couleur-accent: #3498db;
+$couleur-accent-hover: #2980b9;
+
+// Couleurs statuts
+$status-paid: #2ecc71;
+$status-pending: #f1c40f;
+
+// Espacement
+$spacing-unit: 2rem;
+$spacing-small: 0.5rem;
+$spacing-medium: 1rem;
+$spacing-large: 2rem;
+$spacing-xlarge: 3rem;
+
+// Bordures et ombres
+$border-radius: 12px;
+$border-radius-small: 4px;
+$box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+$box-shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+$table-border-color: rgba($couleur-gris-fonce, 0.1);
+$table-hover-color: rgba($couleur-gris-clair, 0.5);
+
+// Typography
+$font-size-base: 1rem;
+$font-size-small: 0.9rem;
+$font-size-medium: 1.1rem;
+$font-size-large: 1.25rem;
+$font-size-xlarge: 1.5rem;
+$font-size-xxlarge: 2rem;
+$font-size-huge: 2.5rem;
+
+// Layout
+$container-max-width: 1200px;
+$grid-gap: 2rem;
+$card-min-width: 300px;
+
+// Animations
+$transition-duration: 0.4s;
+$transition-timing: ease;
+$animation-duration: 0.6s;
+
+// Breakpoints
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 968px;
+$breakpoint-large: 1200px;
+
+// Mixins communs
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin transition($property: all, $duration: $transition-duration, $timing: $transition-timing) {
+  transition: $property $duration $timing;
+}
+
+@mixin responsive($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin card-hover {
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $box-shadow;
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRow {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
