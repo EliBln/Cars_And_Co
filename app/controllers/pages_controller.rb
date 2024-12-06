@@ -24,7 +24,7 @@ class PagesController < ApplicationController
   def profil
     if current_user
       @cars = current_user.cars
-      @rents = current_user.rents.includes(:car)
+      @rents = Rent.where(car_id: @cars.ids)
     else
       redirect_to new_user_session_path, alert: "Vous devez être connecté pour accéder à cette page."
     end

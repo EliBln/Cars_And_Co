@@ -27,7 +27,7 @@
     </td>
     <td><%= rent.car.start_date.strftime("%d/%m/%Y %H:%M") if rent.car.start_date.present? %></td>
     <td><%= rent.car.end_date.strftime("%d/%m/%Y %H:%M") if rent.car.end_date.present? %></td>
-    <td><%= number_to_currency(rent.price, unit: "€", separator: ",", delimiter: " ") %></td>
+    <td><%= number_to_currency(rent.car.price, unit: "€", separator: ",", delimiter: " ") %></td>
     <td>
       <% if rent.payment %>
         Payé
