@@ -16,9 +16,14 @@ class PagesController < ApplicationController
 
   def validate_payment
     @rent = Rent.find_by(id: params[:id])
+    @car = Car.find_by(id: @rent.car_id)
     @rent.payment = true
     @rent.save!
-    redirect_to root_path
+    # redirect_to root_path
+  end
+
+  def confirmation
+    @car = Car.find(params[:car_id])
   end
 
   def profil

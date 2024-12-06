@@ -1,0 +1,138 @@
+.confirmation-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-unit;
+  background-color: $couleur-gris-clair;
+}
+
+.confirmation-card {
+  max-width: 600px;
+  width: 100%;
+  background-color: $couleur-fond;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: $spacing-unit * 2;
+  text-align: center;
+  animation: slideInUp 0.6s ease-out;
+
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto $spacing-unit;
+    color: #2ecc71;
+    animation: scaleIn 0.5s ease-out 0.3s both;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  h1 {
+    color: $couleur-texte;
+    font-size: $font-size-xxlarge;
+    margin-bottom: $spacing-medium;
+  }
+
+  .confirmation-message {
+    color: $couleur-gris-fonce;
+    font-size: $font-size-medium;
+    margin-bottom: $spacing-unit;
+    line-height: 1.6;
+  }
+
+  .booking-details {
+    background-color: rgba($couleur-gris-clair, 0.3);
+    border-radius: $border-radius-small;
+    padding: $spacing-unit;
+    margin: $spacing-unit 0;
+
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      padding: $spacing-small 0;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid rgba($couleur-gris-fonce, 0.1);
+      }
+
+      .label {
+        color: $couleur-gris-fonce;
+        font-size: $font-size-small;
+      }
+
+      .value {
+        font-weight: 600;
+        color: $couleur-texte;
+      }
+    }
+  }
+
+  .confirmation-actions {
+    display: flex;
+    gap: $spacing-medium;
+    margin-top: $spacing-unit;
+
+    a {
+      flex: 1;
+      padding: $spacing-medium;
+      border-radius: $border-radius-small;
+      text-decoration: none;
+      font-weight: 500;
+      @include transition(all);
+
+      &.home-button {
+        background-color: $couleur-gris-clair;
+        color: $couleur-texte;
+
+        &:hover {
+          background-color: darken($couleur-gris-clair, 5%);
+        }
+      }
+
+      &.bookings-button {
+        background-color: $couleur-accent;
+        color: $couleur-fond;
+
+        &:hover {
+          background-color: $couleur-accent-hover;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+// Media queries
+@media (max-width: $breakpoint-mobile) {
+  .confirmation-card {
+    padding: $spacing-unit;
+
+    .confirmation-actions {
+      flex-direction: column;
+    }
+  }
+}
