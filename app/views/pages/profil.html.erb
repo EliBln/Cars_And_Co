@@ -18,19 +18,23 @@
     </thead>
     <tbody>
       <%# cars current user %>
-      <% @rents.each do |rent| %>
+      <% @cars.each do |car| %>
   <tr>
     <td>
-      <%= link_to car_path(rent.car) do %>
-        <%= rent.car.brand %> <%= rent.car.name %>
+      <%= link_to car_path(car) do %>
+        <%= car.brand %> <%= car.name %>
       <% end %>
     </td>
-    <td><%= rent.car.start_date.strftime("%d/%m/%Y %H:%M") if rent.car.start_date.present? %></td>
-    <td><%= rent.car.end_date.strftime("%d/%m/%Y %H:%M") if rent.car.end_date.present? %></td>
-    <td><%= number_to_currency(rent.car.price, unit: "€", separator: ",", delimiter: " ") %></td>
+    <td><%= car.start_date.strftime("%d/%m/%Y %H:%M") if car.start_date.present? %></td>
+    <td><%= car.end_date.strftime("%d/%m/%Y %H:%M") if car.end_date.present? %></td>
+    <td><%= number_to_currency(car.price, unit: "€", separator: ",", delimiter: " ") %></td>
     <td>
-      <% if rent.payment %>
-        Payé
+      <% if car.rents.any? %>
+        <% if car.rents[0].payment %>
+          Payé
+          <% else %>
+          En ligne
+        <% end %>
       <% else %>
         En ligne
       <% end %>

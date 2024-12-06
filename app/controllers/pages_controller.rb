@@ -17,8 +17,10 @@ class PagesController < ApplicationController
   def validate_payment
     @rent = Rent.find_by(id: params[:id])
     @car = Car.find_by(id: @rent.car_id)
-    @rent.payment = true
-    @rent.save!
+    if @rent.payment != true
+      @rent.payment = true
+      @rent.save!
+    end
     # redirect_to root_path
   end
 
@@ -30,9 +32,9 @@ class PagesController < ApplicationController
     if current_user
       @cars = current_user.cars
       @rents = Rent.where(car_id: @cars.ids)
+
     else
       redirect_to new_user_session_path, alert: "Vous devez être connecté pour accéder à cette page."
     end
   end
-
 end
